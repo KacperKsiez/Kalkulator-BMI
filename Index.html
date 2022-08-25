@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="Style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="fontello-54b33507/css/fontello.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row mb-5">
+            <div class="col text-white p-4 bg-dark text-center" style="font-size: 22px;">
+                Kalkulator BMI - Sprawdź czy twoja masa ciała wzgędem wzrostu jest poprawna
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card p-0">
+            <div class="card-header">
+                Obliczanie wskaźnika BMI
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="" id="height">
+                                <label for="height">Podaj twój wzrost [cm]</label>
+                            </div>
+                            <div class="form-floating">
+                                <input id="mass" type="text" class="form-control mt-4" placeholder="">
+                                <label for="mass">Podaj masę [kg]</label>
+                            </div>
+                            <a onclick="oblicz();" class="btn btn-outline-success mt-4 w-50 d-block ms-auto me-auto">Oblicz</a>
+                        </form>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div id="resultdiv" class="card p-2 d-inline-block">
+                            Twój wskaźnik wynosi: <div id="result" class="d-inline-block">0</div>
+                        </div>
+                        <div id="info" class="mt-2 card p-2">
+                            Wygląda na to, że nie uzupełniłeś danych... Uzupełnij dane a następnie wciśnij oblicz.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="card p-0 d-block d-sm-none">
+                <div class="card-header text-center">
+                    <h5>Tablica BMI</h5>
+                </div>
+
+<ul class="list-group ">
+    <li class="list-group-item" id="l1">Kategoria - wygłodzenie</li>
+    <li class="list-group-item" id="l1">BMI (kg/m<sup>2</sup>) < 16,0</li>
+    <li class="list-group-item" id="l1">Waga - niedowaga</li>
+    <li class="list-group-item" id="l1">Ryzyko chorób - zwiększony poziom wystąpienia innych problemów zdrowotnych</li>
+</ul>
+
+                <div id="tabela" class="collapse">
+
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l2">Kategoria - wychudzenie</li>
+                        <li class="list-group-item" id="l2">BMI (kg/m<sup>2</sup>) 16,0–16,99</li>
+                        <li class="list-group-item" id="l2">Waga - niedowaga</li>
+                        <li class="list-group-item" id="l2">Ryzyko chorób - zwiększony poziom wystąpienia innych problemów zdrowotnych</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l3">Kategoria - niedowaga</li>
+                        <li class="list-group-item" id="l3">BMI (kg/m<sup>2</sup>) 17,0–18,49</li>
+                        <li class="list-group-item" id="l3">Waga - niedowaga</li>
+                        <li class="list-group-item" id="l3">Ryzyko chorób - minimalne, ale zwiększony poziom wystąpienia innych problemów zdrowotnych </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l4">Kategoria - pożądana masa ciała</li>
+                        <li class="list-group-item" id="l4">BMI (kg/m<sup>2</sup>) 18,5–24,99</li>
+                        <li class="list-group-item" id="l4">Waga - optimum</li>
+                        <li class="list-group-item" id="l4">Ryzyko chorób - minimalne</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l5">Kategoria - nadwaga</li>
+                        <li class="list-group-item" id="l5">BMI (kg/m<sup>2</sup>) 25,0–29,99</li>
+                        <li class="list-group-item" id="l5">Waga - nadwaga</li>
+                        <li class="list-group-item" id="l5">Ryzyko chorób - średnie</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l6">Kategoria - otyłość I stopnia</li>
+                        <li class="list-group-item" id="l6">BMI (kg/m<sup>2</sup>) 30,0–34,99</li>
+                        <li class="list-group-item" id="l6">Waga - otyłość</li>
+                        <li class="list-group-item" id="l6">Ryzyko chorób - wysokie</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l7">Kategoria - otyłość II stopnia (duża)</li>
+                        <li class="list-group-item" id="l7">BMI (kg/m<sup>2</sup>) 35,0–39,99</li>
+                        <li class="list-group-item" id="l7">Waga - otyłość</li>
+                        <li class="list-group-item" id="l7">Ryzyko chorób - bardzo wysokie</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" id="l8">Kategoria - otyłość III stopnia (chorobliwa)</li>
+                        <li class="list-group-item" id="l8">BMI (kg/m<sup>2</sup>) ≥ 40,0</li>
+                        <li class="list-group-item" id="l8">Waga - otyłość</li>
+                        <li class="list-group-item" id="l8">Ryzyko chorób - ekstremalny poziom ryzyka</li>
+                    </ul>
+
+                </div>
+                <div class="card-footer">
+                    <div id="button" onclick="changebtn();" class="btn btn-primary w-50 d-block my-3 ms-auto me-auto" data-bs-toggle="collapse" data-bs-target="#tabela">Rozwiń listę<i class="icon-down-open"></i></div>
+                </div>
+            </div>
+        </div>
+            <div class="col-12 d-none d-sm-block">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Kategoria</td>
+                        <td>BMI (kg/m²)</td>
+                        <td>Waga ciała</td>
+                        <td>Ryzyko chorób towarzyszących otyłości</td>
+                    </tr>
+                    <tr style="background: rgb(0, 0, 255, 0.55);">
+                        <td>wygłodzenie</td>
+                        <td>< 16,0</td>
+                        <td>niedowaga</td>
+                        <td>minimalne, ale zwiększony poziom
+                            wystąpienia innych
+                            problemów zdrowotnych </td>
+                    </tr>
+                    <tr style="background: rgb(0, 0, 255, 0.35);">
+                        <td>wychudzenie</td>
+
+                        <td>16,0–16,99</td>
+                        <td>niedowaga</td>
+                        <td>minimalne, ale zwiększony poziom
+                            wystąpienia innych
+                            problemów zdrowotnych </td>
+                    </tr>
+                    <tr style="background: rgb(0, 0, 255, 0.25);">
+                        <td>niedowaga</td>
+
+                        <td>17,0–18,49</td>
+                        <td>niedowaga</td>
+                        <td>minimalne, ale zwiększony poziom
+                            wystąpienia innych
+                            problemów zdrowotnych </td>
+                    </tr>
+                    <tr style="background: rgb(0, 255, 0, 0.35);">
+                        <td>pożądana masa ciała</td>
+                        <td>18,5–24,99</td>
+                        <td>optimum</td>
+                        <td>minimalne</td>
+                    </tr>
+                    <tr style="background: rgb(255, 255, 0, 0.35);">
+                        <td>nadwaga</td>
+                        <td>25,0–29,99</td>
+                        <td>nadwaga</td>
+                        <td>średnie</td>
+                    </tr>
+                    <tr style="background: rgb(255, 0, 0, 0.30);">
+                        <td>otyłość I stopnia</td>
+                        <td>30,0–34,99</td>
+                        <td>otyłość</td>
+                        <td>wysokie</td>
+                    </tr>
+                    <tr style="background: rgb(255, 0, 0, 0.35);">
+                        <td>otyłość II stopnia (duża)</td>
+                        <td>35,0–39,99</td>
+                        <td>otyłość</td>
+                        <td>bardzo wysokie</td>
+
+                    </tr>
+                    <tr style="background: rgb(255, 0, 0, 0.45);">
+                        <td>otyłość III stopnia (chorobliwa)</td>
+                        <td>≥ 40,0</td>
+                        <td>otyłość</td>
+                        <td>ekstremalny poziom ryzyka </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="p-2 pe-4 col" style="text-align: justify;">
+                <h2>Co to jest BMI</h2>
+                <p>współczynnik powstały przez podzielenie masy ciała podanej w kilogramach przez kwadrat wysokości podanej w metrach. Klasyfikacja (zakres wartości) wskaźnika BMI została opracowana wyłącznie dla dorosłych i nie może być stosowana u dzieci. Dla oceny prawidłowego rozwoju dziecka wykorzystuje się siatki centylowe, które powinny być dostosowane dla danej populacji. </p>
+                <p>Oznaczanie wskaźnika masy ciała ma znaczenie w ocenie zagrożenia chorobami związanymi z nadwagą i otyłością, np. cukrzycą, chorobą niedokrwienną serca, miażdżycą. Przyjmuje się, że wyższe wartość BMI wiążą się ze zwiększonym ryzykiem dla zdrowia i życia. </p>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white p-4 text-center">
+        Kalkulator BMI - Strona do obliczania wskaźnika BMI - Wszelkie prawa zastrzeżone &copy;
+    </footer>
+</body>
+</html>
